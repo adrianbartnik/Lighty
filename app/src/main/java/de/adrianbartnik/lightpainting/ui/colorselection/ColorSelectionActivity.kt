@@ -3,19 +3,20 @@ package de.adrianbartnik.lightpainting.ui.colorselection
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
-import android.widget.Button
+import android.widget.FrameLayout
 import com.android.colorpicker.ColorPickerPalette
+import com.android.colorpicker.ColorPickerSwatch
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker
 import de.adrianbartnik.lightpainting.R
 
 class ColorSelectionActivity : AppCompatActivity() {
+
+    lateinit var colorPickerPalette : ColorPickerPalette
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,16 +24,24 @@ class ColorSelectionActivity : AppCompatActivity() {
 
         setupActionbar()
 
-        val colorPickerPalette = findViewById(R.id.picker) as ColorPickerPalette
+        colorPickerPalette = findViewById(R.id.picker) as ColorPickerPalette
 
-        val colors = resources.getIntArray(R.array.rainbow)
+        val colors = resources.getIntArray(R.array.color_palette)
 
         colorPickerPalette.init(5)
         colorPickerPalette.drawPalette(colors, colors[0])
 
-        val button = findViewById(R.id.button12) as Button
+        setupCustomColor()
+    }
 
-        button.setOnClickListener {
+    private fun setupCustomColor() {
+        val defaultColor = ContextCompat.getColor(applicationContext, R.color.blue_grey)
+        val view = ColorPickerSwatch(this@ColorSelectionActivity, defaultColor, false, null)
+
+        val framelayout = findViewById(R.id.color_selection_custom_color) as FrameLayout
+        framelayout.addView(view)
+
+        view.setOnClickListener {
             val defaultRed = resources.getInteger(R.integer.default_red)
             val defaulGreen = resources.getInteger(R.integer.default_green)
             val defaultBlue = resources.getInteger(R.integer.default_blue)
@@ -43,10 +52,9 @@ class ColorSelectionActivity : AppCompatActivity() {
             cp.show()
 
             cp.setOnColorSelected { col ->
-                Log.d(TAG, Integer.toString(Color.red(col)))
-                Log.d(TAG, Integer.toString(Color.green(col)))
-                Log.d(TAG, Integer.toString(Color.blue(col)))
-
+                view.setColor(col)
+                view.setChecked(true)
+                colorPickerPalette.clearCurrentSelection()
                 cp.dismiss()
             }
         }
@@ -61,7 +69,7 @@ class ColorSelectionActivity : AppCompatActivity() {
         actionbar?.setDisplayShowTitleEnabled(false)
 
         val upArrow = ContextCompat.getDrawable(application, R.drawable.abc_ic_ab_back_material)
-        upArrow.setColorFilter(ContextCompat.getColor(application, R.color.blue), PorterDuff.Mode.SRC_ATOP)
+        upArrow.setColorFilter(ContextCompat.getColor(application, R.color.upindicator_color), PorterDuff.Mode.SRC_ATOP)
         actionbar?.setHomeAsUpIndicator(upArrow)
     }
 
