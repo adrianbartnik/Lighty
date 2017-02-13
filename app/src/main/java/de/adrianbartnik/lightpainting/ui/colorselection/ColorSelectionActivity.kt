@@ -47,13 +47,13 @@ class ColorSelectionActivity : AppCompatActivity() {
         val mRevealView = findViewById(R.id.reveal_view)
 
         mFab.setOnClickListener {
-            mFab.setClickable(false) // Avoid naughty guys clicking FAB again and again...
+            mFab.isClickable = false // Avoid naughty guys clicking FAB again and again...
             val location = IntArray(2)
             mFab.getLocationOnScreen(location)
             location[0] += mFab.getWidth() / 2
             location[1] += mFab.getHeight() / 2
 
-            val intent = PaintingActivity.GetStartIntent(this@ColorSelectionActivity, PaintingActivity.PaintShape.CircleShape)
+            val intent = PaintingActivity.GetStartIntent(this@ColorSelectionActivity, PaintShape.FullscreenShape)
 
             mRevealView.setVisibility(View.VISIBLE)
             mRevealLayout.setVisibility(View.VISIBLE)
@@ -115,10 +115,16 @@ class ColorSelectionActivity : AppCompatActivity() {
 
     companion object {
 
-        private val TAG = ColorSelectionActivity::class.java.simpleName
+        private val EXTRA_SHAPE = "color_selection_shape"
 
-        fun GetStartIntent(context: Context): Intent {
-            return Intent(context, ColorSelectionActivity::class.java)
+        fun GetStartIntent(context: Context, shape: PaintShape): Intent {
+            val intent = Intent(context, ColorSelectionActivity::class.java)
+            intent.putExtra(EXTRA_SHAPE, shape)
+            return intent
         }
+    }
+
+    enum class PaintShape {
+        CircleShape, FullscreenShape, BarShape
     }
 }

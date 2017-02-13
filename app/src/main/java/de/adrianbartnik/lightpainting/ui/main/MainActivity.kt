@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.Toast
 import de.adrianbartnik.lightpainting.R
 import de.adrianbartnik.lightpainting.ui.colorselection.ColorSelectionActivity
@@ -18,8 +17,17 @@ class MainActivity : AppCompatActivity() {
 
         setupActionbar()
 
-        val button = findViewById(R.id.button3) as Button
-        button.setOnClickListener { startActivity(ColorSelectionActivity.GetStartIntent(application)) }
+        findViewById(R.id.activity_main_fullscreen).setOnClickListener {
+            startActivity(ColorSelectionActivity.GetStartIntent(application, ColorSelectionActivity.PaintShape.FullscreenShape))
+        }
+
+        findViewById(R.id.activity_main_circle).setOnClickListener {
+            startActivity(ColorSelectionActivity.GetStartIntent(application, ColorSelectionActivity.PaintShape.CircleShape))
+        }
+
+        findViewById(R.id.activity_main_bar).setOnClickListener {
+            startActivity(ColorSelectionActivity.GetStartIntent(application, ColorSelectionActivity.PaintShape.BarShape))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

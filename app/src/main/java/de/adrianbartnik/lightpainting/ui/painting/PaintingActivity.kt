@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import de.adrianbartnik.lightpainting.ui.colorselection.ColorSelectionActivity
 import de.adrianbartnik.lightpainting.ui.painting.shape.Fullscreen
 
 class PaintingActivity : AppCompatActivity() {
@@ -22,15 +23,11 @@ class PaintingActivity : AppCompatActivity() {
         }
     }
 
-    enum class PaintShape {
-        CircleShape,
-    }
-
     companion object {
 
         private val EXTRA_SHAPE = "shape"
 
-        fun GetStartIntent(context: Context, shape: PaintShape): Intent {
+        fun GetStartIntent(context: Context, shape: ColorSelectionActivity.PaintShape): Intent {
             val intent = Intent(context, PaintingActivity::class.java)
             intent.putExtra(EXTRA_SHAPE, shape)
             return intent
