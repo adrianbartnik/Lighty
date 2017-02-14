@@ -24,6 +24,7 @@ import de.adrianbartnik.lightpainting.ui.painting.PaintingActivity
 class ColorSelectionActivity : AppCompatActivity() {
 
     lateinit var colorPickerPalette : ColorPickerPalette
+    lateinit var customColor: ColorPickerSwatch
     lateinit var mFab : FloatingActionButton
     var currentColor : Int = 0
 
@@ -42,8 +43,13 @@ class ColorSelectionActivity : AppCompatActivity() {
 
         val colors = resources.getIntArray(R.array.color_palette)
 
-        colorPickerPalette.init(5)
+        colorPickerPalette.init(5, {
+            setCurrentColer(it?.color ?: currentColor)
+            customColor.setChecked(false)
+        })
+
         colorPickerPalette.drawPalette(colors, colors[0])
+        setCurrentColer(colors[0])
     }
 
     private fun setupFAB() {
@@ -84,13 +90,12 @@ class ColorSelectionActivity : AppCompatActivity() {
     }
 
     private fun setupCustomColor() {
-        setCurrentColder(ContextCompat.getColor(applicationContext, R.color.blue_grey))
-        val view = ColorPickerSwatch(this@ColorSelectionActivity, currentColor, false, null)
+        customColor = ColorPickerSwatch(this@ColorSelectionActivity, currentColor, false, null)
 
         val framelayout = findViewById(R.id.color_selection_custom_color) as FrameLayout
-        framelayout.addView(view)
+        framelayout.addView(customColor)
 
-        view.setOnClickListener {
+        customColor.setOnClickListener {
             val default = ContextCompat.getColor(this, R.color.default_color_colorpicker)
 
             val cp = ColorPicker(this@ColorSelectionActivity, Color.red(default), Color.green(default), Color.blue(default))
@@ -99,16 +104,16 @@ class ColorSelectionActivity : AppCompatActivity() {
             cp.show()
 
             cp.setOnColorSelected { col ->
-                view.setColor(col)
-                view.setChecked(true)
+                customColor.setColor(col)
+                customColor.setChecked(true)
                 colorPickerPalette.clearCurrentSelection()
-                setCurrentColder(col)
+                setCurrentColer(col)
                 cp.dismiss()
             }
         }
     }
 
-    private fun setCurrentColder(col: Int) {
+    private fun setCurrentColer(col: Int) {
         currentColor = col
         mFab.backgroundTintList = ColorStateList.valueOf(col)
         mFab.rippleColor = col
