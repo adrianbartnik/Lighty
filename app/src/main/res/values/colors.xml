@@ -28,6 +28,7 @@
     <color name="grey">#9D9D9D</color>
     <color name="blue_grey">#5E7C8B</color>
     <color name="dark">#4f5456</color>
+    <color name="activity_main_shape_color">#fff</color>
 
     <array name="color_palette">
         <item>@color/red</item>
