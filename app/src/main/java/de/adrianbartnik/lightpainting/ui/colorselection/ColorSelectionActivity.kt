@@ -90,15 +90,19 @@ class ColorSelectionActivity : AppCompatActivity() {
     }
 
     private fun setupCustomColor() {
-        customColor = ColorPickerSwatch(this@ColorSelectionActivity, currentColor, false, null)
+        val default = ContextCompat.getColor(this, R.color.default_color_colorpicker)
+
+        customColor = ColorPickerSwatch(this@ColorSelectionActivity, default, false, null)
 
         val framelayout = findViewById(R.id.color_selection_custom_color) as FrameLayout
         framelayout.addView(customColor)
 
         customColor.setOnClickListener {
-            val default = ContextCompat.getColor(this, R.color.default_color_colorpicker)
 
-            val cp = ColorPicker(this@ColorSelectionActivity, Color.red(default), Color.green(default), Color.blue(default))
+            val cp = ColorPicker(this@ColorSelectionActivity,
+                    Color.red(customColor.color),
+                    Color.green(customColor.color),
+                    Color.blue(customColor.color))
             cp.setCanceledOnTouchOutside(true)
             cp.setCancelable(true)
             cp.show()
