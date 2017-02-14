@@ -41,7 +41,7 @@
                 android:layout_margin="8dp"
                 android:text="Select your color"
                 android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <com.android.colorpicker.ColorPickerPalette
                 android:id="@+id/picker"

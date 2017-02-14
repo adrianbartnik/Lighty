@@ -23,7 +23,7 @@
         <activity
             android:name=".ui.painting.PaintingActivity"
             android:parentActivityName=".ui.colorselection.ColorSelectionActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppThemeDark"/>
 
     </application>
 
