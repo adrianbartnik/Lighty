@@ -3,19 +3,20 @@ package de.adrianbartnik.lightpainting.ui.painting.shape
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.View
 
 
 @SuppressLint("ViewConstructor")
-open class BaseShape(context: Context, rgbColor: Triple<Int, Int, Int>) : View(context) {
+open class BaseShape(context: Context, color: Int) : View(context) {
 
     val paint = Paint()
     val black = Paint()
     var turnBlack = false
 
     init {
-        paint.setARGB(255, rgbColor.first, rgbColor.second, rgbColor.third)
+        paint.setARGB(255, Color.red(color), Color.green(color), Color.blue(color))
         paint.strokeWidth = 8f
         paint.isAntiAlias = true
         paint.strokeCap = Paint.Cap.BUTT

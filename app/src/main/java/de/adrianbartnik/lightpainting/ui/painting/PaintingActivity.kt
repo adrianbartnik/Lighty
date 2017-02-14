@@ -3,10 +3,11 @@ package de.adrianbartnik.lightpainting.ui.painting
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import de.adrianbartnik.lightpainting.ui.colorselection.ColorSelectionActivity
+import de.adrianbartnik.lightpainting.ui.painting.shape.Bar
+import de.adrianbartnik.lightpainting.ui.painting.shape.Circle
 import de.adrianbartnik.lightpainting.ui.painting.shape.Fullscreen
 
 class PaintingActivity : AppCompatActivity() {
@@ -15,15 +16,15 @@ class PaintingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val col =  intent.extras.getInt(EXTRA_COLOR)
+        val shape = intent.extras.getSerializable(EXTRA_SHAPE) as ColorSelectionActivity.PaintShape
 
-        setContentView(Fullscreen(this, Triple(Color.red(col), Color.green(col), Color.blue(col))))
-
-        val shape = intent.extras?.containsKey(EXTRA_SHAPE) ?: false
-
-        if (!shape) {
-            finish()
-            return
+        val view = when (shape) {
+            ColorSelectionActivity.PaintShape.BarShape -> Bar(this, col)
+            ColorSelectionActivity.PaintShape.FullscreenShape -> Fullscreen(this, col)
+            ColorSelectionActivity.PaintShape.CircleShape -> Circle(this, col)
         }
+
+        setContentView(view)
     }
 
     companion object {

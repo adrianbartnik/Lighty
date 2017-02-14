@@ -6,7 +6,7 @@ import android.content.Context
 import android.graphics.Canvas
 
 @SuppressLint("ViewConstructor")
-class Circle(context: Context, rgbColor: Triple<Int, Int, Int>) : BaseShape(context, rgbColor) {
+class Circle(context: Context, color: Int) : BaseShape(context, color) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

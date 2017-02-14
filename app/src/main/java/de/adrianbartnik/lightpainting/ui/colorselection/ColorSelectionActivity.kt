@@ -67,7 +67,8 @@ class ColorSelectionActivity : AppCompatActivity() {
 
             val col = colorPickerPalette.currentSelectedColor?.color ?: currentColor
 
-            val intent = PaintingActivity.GetStartIntent(this@ColorSelectionActivity, PaintShape.FullscreenShape, col)
+            val shape = intent.extras.getSerializable(EXTRA_SHAPE) as PaintShape
+            val intent = PaintingActivity.GetStartIntent(this@ColorSelectionActivity, shape, col)
 
             mRevealView.setVisibility(View.VISIBLE)
             mRevealView.setBackgroundColor(col)
