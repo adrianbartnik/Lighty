@@ -6,7 +6,7 @@ import android.graphics.Canvas
 
 
 @SuppressLint("ViewConstructor")
-class Fullscreen(context: Context, color: Int) : BaseShape(context, color) {
+class Fullscreen(context: Context, color: Int, animating : Boolean = false) : BaseShape(context, color, animating) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

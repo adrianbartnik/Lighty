@@ -5,7 +5,7 @@ import android.content.Context
 import android.graphics.Canvas
 
 @SuppressLint("ViewConstructor")
-class Bar(context: Context, rgbColor: Int) : BaseShape(context, rgbColor) {
+class Bar(context: Context, rgbColor: Int, animating : Boolean = false) : BaseShape(context, rgbColor, animating) {
 
     companion object {
         private val WIDTH_FACTOR = 0.8f

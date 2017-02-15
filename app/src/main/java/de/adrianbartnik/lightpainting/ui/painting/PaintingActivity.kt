@@ -19,9 +19,9 @@ class PaintingActivity : AppCompatActivity() {
         val shape = intent.extras.getSerializable(EXTRA_SHAPE) as ColorSelectionActivity.PaintShape
 
         val view = when (shape) {
-            ColorSelectionActivity.PaintShape.BarShape -> Bar(this, col)
-            ColorSelectionActivity.PaintShape.FullscreenShape -> Fullscreen(this, col)
-            ColorSelectionActivity.PaintShape.CircleShape -> Circle(this, col)
+            ColorSelectionActivity.PaintShape.BarShape -> Bar(this, col, true)
+            ColorSelectionActivity.PaintShape.FullscreenShape -> Fullscreen(this, col, true)
+            ColorSelectionActivity.PaintShape.CircleShape -> Circle(this, col, true)
         }
 
         setContentView(view)
