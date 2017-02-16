@@ -93,9 +93,10 @@
                     android:layout_marginRight="16dp"
                     android:text="Or rainbow gradient"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                <FrameLayout
+                    android:id="@+id/color_selection_rainbox_gradient"
+                    android:layout_width="@dimen/color_swatch_small"
+                    android:layout_height="@dimen/color_swatch_small"/>
 
             </LinearLayout>
 

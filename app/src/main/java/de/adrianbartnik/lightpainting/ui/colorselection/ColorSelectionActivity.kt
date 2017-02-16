@@ -25,6 +25,7 @@ class ColorSelectionActivity : AppCompatActivity() {
 
     lateinit var colorPickerPalette : ColorPickerPalette
     lateinit var customColor: ColorPickerSwatch
+    lateinit var rainbowGradient: ColorPickerSwatch
     lateinit var mFab : FloatingActionButton
     var currentColor : Int = 0
 
@@ -33,6 +34,7 @@ class ColorSelectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_color_selection)
 
         setupActionbar()
+        setupRainbowGradient()
         setupFAB()
         setupColorpalette()
         setupCustomColor()
@@ -46,6 +48,7 @@ class ColorSelectionActivity : AppCompatActivity() {
         colorPickerPalette.init(5, {
             setCurrentColer(it?.color ?: currentColor)
             customColor.setChecked(false)
+            rainbowGradient.setChecked(false)
         })
 
         colorPickerPalette.drawPalette(colors, colors[0])
@@ -112,16 +115,40 @@ class ColorSelectionActivity : AppCompatActivity() {
                 customColor.setColor(col)
                 customColor.setChecked(true)
                 colorPickerPalette.clearCurrentSelection()
+                rainbowGradient.setChecked(false)
                 setCurrentColer(col)
                 cp.dismiss()
             }
         }
     }
 
+    private fun setupRainbowGradient() {
+
+        rainbowGradient = ColorPickerSwatch(this@ColorSelectionActivity, 0, false, null)
+
+        val framelayout = findViewById(R.id.color_selection_rainbox_gradient) as FrameLayout
+        rainbowGradient.setRainbowGradient()
+        framelayout.addView(rainbowGradient)
+
+        rainbowGradient.setOnClickListener {
+            rainbowGradient.setChecked(true)
+            setCurrentColer(rainbowGradient.color)
+            customColor.setChecked(false)
+            colorPickerPalette.clearCurrentSelection()
+        }
+    }
+
     private fun setCurrentColer(col: Int) {
         currentColor = col
-        mFab.backgroundTintList = ColorStateList.valueOf(col)
-        mFab.rippleColor = col
+
+        if (!rainbowGradient.isChecked) {
+            mFab.backgroundTintList = ColorStateList.valueOf(col)
+            mFab.rippleColor = col
+        } else {
+            val white = 0xffffffff.toInt()
+            mFab.backgroundTintList = ColorStateList.valueOf(white)
+            mFab.rippleColor = white
+        }
     }
 
     private fun setupActionbar() {
