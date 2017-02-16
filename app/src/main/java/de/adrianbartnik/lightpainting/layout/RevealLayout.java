@@ -18,7 +18,7 @@ import android.widget.FrameLayout;
 @SuppressWarnings("unused")
 public class RevealLayout extends FrameLayout {
 
-    private static final int DEFAULT_DURATION = 600;
+    public static final int DEFAULT_DURATION = 600;
     private Path mClipPath;
     private int mClipCenterX, mClipCenterY = 0;
     private Animation mAnimation;

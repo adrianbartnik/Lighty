@@ -68,10 +68,20 @@ class ColorSelectionActivity : AppCompatActivity() {
             location[0] += mFab.getWidth() / 2
             location[1] += mFab.getHeight() / 2
 
-            val col = colorPickerPalette.currentSelectedColor?.color ?: currentColor
+            val col = if (colorPickerPalette.currentSelectedColor != null) {
+                colorPickerPalette.currentSelectedColor.color
+            } else if (customColor.isChecked) {
+                customColor.color
+            } else {
+                0xffffffff.toInt()
+            }
 
             val shape = intent.extras.getSerializable(EXTRA_SHAPE) as PaintShape
-            val intent = PaintingActivity.GetStartIntent(this@ColorSelectionActivity, shape, col)
+            val intent = if (rainbowGradient.isChecked) {
+                PaintingActivity.GetStartIntent(this@ColorSelectionActivity, shape, true)
+            } else {
+                PaintingActivity.GetStartIntent(this@ColorSelectionActivity, shape, col)
+            }
 
             mRevealView.setVisibility(View.VISIBLE)
             mRevealView.setBackgroundColor(col)
@@ -83,7 +93,7 @@ class ColorSelectionActivity : AppCompatActivity() {
                 startActivity(intent)
                  // Without using R.anim.hold, the screen will flash because of transition of Activities.
                 overridePendingTransition(0, R.anim.hold)
-            }, 600) // 600 is default duration of reveal animation in RevealLayout
+            }, RevealLayout.DEFAULT_DURATION.toLong())
 
             mFab.postDelayed({
                 mFab.setClickable(true)
