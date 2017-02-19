@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">Lightpainting</string>
+    <string name="app_name">Lighty</string>
     <string name="activity_main_title">Simple Lightpainting App for Android</string>
     <string name="activity_main_fullscreen">Fullscreen</string>
     <string name="activity_main_circle">Circle</string>
     <string name="activity_main_bar">Bar</string>
+    <string name="activity_about_app_icon_description">App icon</string>
+    <string name="activity_about_version">Version: %1$s</string>
+    <string name="activity_about_description">Lighty enables you to use your phone for light painting, by drawing different shapes and colors.</string>
+    <string name="activity_about_button_github">Github</string>
+    <string name="activity_about_button_license">License</string>
+    <string name="activity_about_libraries_description">Used libraries:</string>
 </resources>

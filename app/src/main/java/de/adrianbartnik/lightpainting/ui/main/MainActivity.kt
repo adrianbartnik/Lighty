@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import de.adrianbartnik.lightpainting.R
+import de.adrianbartnik.lightpainting.ui.about.AboutActivity
 import de.adrianbartnik.lightpainting.ui.colorselection.ColorSelectionActivity
 
 class MainActivity : AppCompatActivity() {
@@ -39,11 +39,15 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.new_game -> {
-                Toast.makeText(this, "Holla", Toast.LENGTH_SHORT).show()
+                startAboutActivity()
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun startAboutActivity() {
+        startActivity(AboutActivity.GetStartIntent(this))
     }
 
     private fun setupActionbar() {
