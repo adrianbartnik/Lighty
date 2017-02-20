@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Lighty</string>
-    <string name="activity_main_title">Simple Lightpainting App for Android</string>
+    <string name="activity_main_title">Lightpainting for Android</string>
+    <string name="activity_main_description">Select the drawing shape</string>
     <string name="activity_main_fullscreen">Fullscreen</string>
     <string name="activity_main_circle">Circle</string>
     <string name="activity_main_bar">Bar</string>
