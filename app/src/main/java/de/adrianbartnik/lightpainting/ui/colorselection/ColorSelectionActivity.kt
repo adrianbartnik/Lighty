@@ -68,7 +68,7 @@ class ColorSelectionActivity : AppCompatActivity() {
             location[0] += mFab.getWidth() / 2
             location[1] += mFab.getHeight() / 2
 
-            val col = if (colorPickerPalette.currentSelectedColor != null) {
+            var col = if (colorPickerPalette.currentSelectedColor != null) {
                 colorPickerPalette.currentSelectedColor.color
             } else if (customColor.isChecked) {
                 customColor.color
@@ -81,6 +81,10 @@ class ColorSelectionActivity : AppCompatActivity() {
                 PaintingActivity.GetStartIntent(this@ColorSelectionActivity, shape, true)
             } else {
                 PaintingActivity.GetStartIntent(this@ColorSelectionActivity, shape, col)
+            }
+
+            if (shape != PaintShape.FullscreenShape) {
+                col = 0xff000000.toInt()
             }
 
             mRevealView.setVisibility(View.VISIBLE)
