@@ -212,4 +212,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
 limitations under the License.</string>
+    <string name="activity_colorselection_title">Select your color</string>
+    <string name="activity_colorselection_custom_color">Or a custom color</string>
+    <string name="activity_colorselection_rainbow_animation">Or rainbow animation</string>
 </resources>
