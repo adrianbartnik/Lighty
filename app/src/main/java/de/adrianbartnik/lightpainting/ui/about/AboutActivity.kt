@@ -1,12 +1,14 @@
 package de.adrianbartnik.lightpainting.ui.about
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -27,7 +29,32 @@ class AboutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_about)
         setupActionbar()
         setupVersion()
+        setupButtons()
         setupLibraries()
+    }
+
+    private fun setupButtons() {
+        findViewById(R.id.activity_about_button_github).setOnClickListener {
+            openURLInBrowser(getString(R.string.activity_about_github_url))
+        }
+
+        findViewById(R.id.activity_about_button_license).setOnClickListener {
+
+            val builder = AlertDialog.Builder(this)
+                    .setTitle(R.string.activity_about_license_dialog_title)
+                    .setMessage(R.string.activity_about_apache_license_text)
+                    .setPositiveButton("OK", object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            dialog?.dismiss()
+                        }
+                    })
+                    .create()
+
+            builder.setCancelable(true)
+            builder.setCanceledOnTouchOutside(true)
+
+            builder.show()
+        }
     }
 
     private fun setupVersion() {
@@ -53,13 +80,7 @@ class AboutActivity : AppCompatActivity() {
 
         val recyclerViewAdapter = RecyclerViewAdapter(this, test, object : RecyclerViewAdapter.OnClickListener {
             override fun onLibraryClick(url: String) {
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-
-                if (intent.resolveActivity(packageManager) != null) {
-                    startActivity(browserIntent);
-                } else {
-                    Toast.makeText(application, "Failed to open website in browser for: $url", Toast.LENGTH_LONG).show()
-                }
+                openURLInBrowser(url)
             }
         })
 
@@ -68,6 +89,16 @@ class AboutActivity : AppCompatActivity() {
 
         val scrollview = findViewById(R.id.scrollview_About) as NestedScrollView
         scrollview.fullScroll(ScrollView.FOCUS_UP)
+    }
+
+    private fun openURLInBrowser(url: String) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(browserIntent);
+        } else {
+            Toast.makeText(application, "Failed to open website in browser for: $url", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun setupActionbar() {

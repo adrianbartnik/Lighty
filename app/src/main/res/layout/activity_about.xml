@@ -73,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:id="@+id/activity_about_button_github"
                     android:text="@string/activity_about_button_github"/>
 
                 <Button
@@ -80,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:id="@+id/activity_about_button_license"
                     android:text="@string/activity_about_button_license"/>
 
             </LinearLayout>
