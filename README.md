@@ -8,3 +8,5 @@ The user can select different shapes and a color, which then will be shown on th
 * Doubletap for back or other means of navigation back from drawing activity
 * Dark theme for color picker
 * Make speed in aninmation customizable
+* Tablet layout
+* Better explanation / UI, e.g. more text
