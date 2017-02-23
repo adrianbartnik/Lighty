@@ -10,3 +10,5 @@ The user can select different shapes and a color, which then will be shown on th
 * Make speed in aninmation customizable
 * Tablet layout
 * Better explanation / UI, e.g. more text
+* Include colorpicker dependency
+* Add icon
